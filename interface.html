@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Stabilizer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Video Stabilizer</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="video" accept="video/*" required>
+            <button type="submit">Upload and Stabilize</button>
+        </form>
+        {% if output_video %}
+            <h2>Stabilized Video:</h2>
+            <video controls width="640">
+                <source src="{{ url_for('static', filename='output/' + output_video) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            
+            <!-- Download button -->
+            <br><br>
+            <a href="{{ url_for('static', filename='output/' + output_video) }}" download>
+                <button type="button">Download Stabilized Video</button>
+            </a>
+            
+        {% endif %}
+    </div>
+</body>
+</html>
